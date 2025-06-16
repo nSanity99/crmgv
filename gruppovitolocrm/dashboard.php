@@ -10,6 +10,41 @@ ini_set('display_errors', 0);
 $timestamp = date("Y-m-d H:i:s");
 error_log("--- [{$timestamp}] Accesso a dashboard.php ---");
 
+require_once __DIR__.'/includes/db_config.php';
+
+// Calcolo notifiche base per dashboard
+$new_orders_count = 0;
+$new_reports_count = 0;
+
+$db_conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+if (!$db_conn->connect_error) {
+    if ($_SESSION['ruolo'] === 'admin') {
+        $res = $db_conn->query("SELECT COUNT(*) AS c FROM ordini WHERE stato_ordine = 'Inviato'");
+        if ($res) { $new_orders_count = (int)$res->fetch_assoc()['c']; $res->free(); }
+        $res = $db_conn->query("SELECT COUNT(*) AS c FROM segnalazioni WHERE stato = 'Inviata'");
+        if ($res) { $new_reports_count = (int)$res->fetch_assoc()['c']; $res->free(); }
+    } else {
+        $uid = $_SESSION['user_id'] ?? 0;
+        $stmt = $db_conn->prepare("SELECT COUNT(*) AS c FROM ordini_chat oc JOIN ordini o ON oc.id_ordine = o.id_ordine WHERE oc.risposta_utente IS NULL AND o.id_utente_richiedente = ?");
+        if ($stmt) {
+            $stmt->bind_param('i', $uid);
+            $stmt->execute();
+            $r = $stmt->get_result();
+            if ($r) { $new_orders_count = (int)$r->fetch_assoc()['c']; }
+            $stmt->close();
+        }
+        $stmt = $db_conn->prepare("SELECT COUNT(*) AS c FROM segnalazioni_chat sc JOIN segnalazioni s ON sc.id_segnalazione = s.id_segnalazione WHERE sc.risposta_utente IS NULL AND s.id_utente_segnalante = ?");
+        if ($stmt) {
+            $stmt->bind_param('i', $uid);
+            $stmt->execute();
+            $r = $stmt->get_result();
+            if ($r) { $new_reports_count = (int)$r->fetch_assoc()['c']; }
+            $stmt->close();
+        }
+    }
+    $db_conn->close();
+}
+
 // Blocco di sicurezza flessibile
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
@@ -45,6 +80,9 @@ $user_role_display = htmlspecialchars(isset($_SESSION['ruolo']) ? $_SESSION['ruo
         .footer-logo-area { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #e9ecef; }
         .footer-logo-area img { max-width: 60px; opacity: 0.5; }
         @keyframes fadeInSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .dashboard-notifications { text-align: center; margin-bottom: 25px; }
+        .dashboard-notifications .notif { background-color: #B08D57; color: #fff; padding: 6px 12px; border-radius: 20px; margin: 0 5px; display: inline-block; }
 
         /* Stili per le "Tool Cards" (invariati) */
         .tool-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; }
@@ -106,6 +144,22 @@ $user_role_display = htmlspecialchars(isset($_SESSION['ruolo']) ? $_SESSION['ruo
                 <a href="logout.php" class="logout-button">Logout</a>
             </div>
         </header>
+        <?php if ($new_orders_count > 0 || $new_reports_count > 0): ?>
+        <div class="dashboard-notifications">
+            <?php if ($new_orders_count > 0): ?>
+                <span class="notif">
+                    <?php echo $new_orders_count; ?>
+                    <?php echo ($user_role_from_session === 'admin') ? ' nuovo ordine' . ($new_orders_count > 1 ? 'i' : '') : ' nuovo messaggio ordine' . ($new_orders_count > 1 ? 'i' : ''); ?>
+                </span>
+            <?php endif; ?>
+            <?php if ($new_reports_count > 0): ?>
+                <span class="notif">
+                    <?php echo $new_reports_count; ?>
+                    <?php echo ($user_role_from_session === 'admin') ? ' nuova segnalazione' . ($new_reports_count > 1 ? 'i' : '') : ' nuovo messaggio segnalazione' . ($new_reports_count > 1 ? 'i' : ''); ?>
+                </span>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
         <?php if ($user_role_from_session === 'admin'): ?>
             <div class="tool-cards-grid">
                 <a href="gestioneordini.php" class="tool-card">
