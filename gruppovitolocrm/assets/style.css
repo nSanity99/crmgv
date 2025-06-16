@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Stili Globali e Reset di Base
+   ========================================================================== */
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Allinea all'inizio, il login lo centrerà da solo */
+    min-height: 100vh;
+    overflow-y: auto;
+}
+@keyframes fadeInSlideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Contenitori di Pagina
+   ========================================================================== */
+.login-page-container,
+.page-container {
+    width: 100%;
+    animation: fadeInSlideUp 0.6s ease-out forwards;
+    margin: 25px 0;
+    padding: 0 15px; /* Spazio laterale di sicurezza */
+}
+.login-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 480px;
+}
+.page-container {
+    max-width: 1200px;
+}
+.page-container.form-page {
+    max-width: 900px;
+}
+
+/* ==========================================================================
+   Header (Comune per tutte le pagine interne)
+   ========================================================================== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 18px 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border-bottom: 4px solid #B08D57;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.header-branding { display: flex; align-items: center; gap: 18px; }
+.header-branding .logo { max-height: 50px; display: block; }
+.header-titles h1 { font-size: 1.6em; color: #2E572E; margin: 0; font-weight: 600; line-height: 1.2; }
+.header-titles h2 { font-size: 0.95em; color: #6c757d; margin: 0; font-weight: 400; letter-spacing: 0.5px; }
+
+.user-session-controls { text-align: right; font-size: 0.9em; color: #555; display: flex; align-items: center; gap: 15px; }
+.user-session-controls .user-info { line-height: 1.4; text-align: right; }
+.user-session-controls .user-info strong { font-weight: 600; color: #333; }
+.user-session-controls .nav-link-button, 
+.user-session-controls .logout-button { 
+    padding: 7px 14px; font-size: 0.9em; color: white !important; text-decoration: none; 
+    border-radius: 5px; transition: background-color 0.2s ease, transform 0.2s ease; font-weight: 500;
+    white-space: nowrap;
+}
+.user-session-controls .nav-link-button { background-color: #6c757d; }
+.user-session-controls .nav-link-button:hover { background-color: #5a6268; transform: translateY(-1px); }
+.user-session-controls .logout-button { background-color: #D42A2A; }
+.user-session-controls .logout-button:hover { background-color: #c82333; transform: translateY(-1px); }
+
+/* ==========================================================================
+   Contenuto Principale
+   ========================================================================== */
+.module-content, .dashboard-content-wrapper {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+.app-section-header { 
+    display: flex; justify-content: space-between; align-items: center; 
+    margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e9ecef; 
+}
+.app-section-header h2 { font-size: 1.4em; color: #2E572E; margin: 0; font-weight: 600;}
+.app-section-header .action-buttons a { margin-left: 10px; }
+
+/* Stili per la Dashboard */
+.dashboard-welcome-banner { background-color: #e9f5ff; color: #004085; padding: 25px 30px; border-radius: 8px; margin-bottom: 35px; text-align: center; border: 1px solid #b8daff; }
+.dashboard-welcome-banner h2 { font-size: 1.8em; margin: 0 0 8px 0; font-weight: 500; }
+.dashboard-welcome-banner p { font-size: 1.1em; margin: 0; }
+.tool-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; }
+.tool-card {
+    background-color: #ffffff; border-radius: 8px; padding: 25px 30px; text-decoration: none;
+    color: #495057; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex; flex-direction: column; border: 1px solid #dee2e6;
+}
+.tool-card:hover { transform: translateY(-5px); box-shadow: 0 7px 25px rgba(0,0,0,0.1); }
+.tool-card-header { display: flex; align-items: center; margin-bottom: 18px; }
+.tool-card-icon { font-size: 2.2em; color: #B08D57; background-color: rgba(176, 141, 87, 0.1); width: 50px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
+.tool-card-title { font-size: 1.35em; color: #2E572E; margin: 0; font-weight: 600; line-height: 1.3; }
+.tool-card-description { font-size: 0.95em; color: #6c757d; line-height: 1.6; flex-grow: 1; margin-bottom: 0; }
+
+/* ... (Tutti gli altri stili per tabelle, form, bottoni, ecc. che abbiamo già definito) ... */
+/* Aggiungo qui gli stili mancanti e unifico il resto per completezza */
+
+/* Login Box */
+.login-box {
+    background-color: #FFFFFF; padding: 30px 40px; border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); text-align: center; width: 100%;
+    border-top: 6px solid #B08D57;
+}
+.login-box .logo { max-width: 130px; margin-bottom: 20px; }
+.login-box h1 { color: #2E572E; margin-bottom: 10px; font-size: 28px; font-weight: 600; }
+.login-box h2 { color: #495057; margin-bottom: 25px; font-size: 18px; font-weight: normal; }
+
+/* Form Generali */
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 500; color: #495057; font-size:0.95em; }
+.form-group input[type="text"], .form-group input[type="password"], .form-group input[type="email"],
+.form-group input[type="date"], .form-group input[type="number"], .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid #ced4da; border-radius: 5px; font-size: 1em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: #B08D57; outline: none; box-shadow: 0 0 0 0.2rem rgba(176, 141, 87, 0.25);
+}
+.form-group input[readonly] { background-color: #e9ecef; cursor: not-allowed; }
+.form-container { margin-top: 25px; padding: 25px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; }
+.form-container h3 { margin-top: 0; margin-bottom: 20px; color: #2E572E; font-size: 1.3em; font-weight: 600;}
+
+/* Pulsanti */
+button[type="submit"], .admin-button, .action-button { 
+    background-color: #B08D57; color: white; padding: 10px 20px; border: none; 
+    border-radius: 5px; cursor: pointer; font-size: 1em; text-decoration: none; 
+    display: inline-block; transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; 
+    font-weight: 500; margin-top: 10px; text-align:center;
+}
+.login-box button[type="submit"] { width: 100%; font-size: 1.05em; padding: 12px 20px; }
+button[type="submit"]:hover, .admin-button:hover, .action-button:hover { background-color: #9c7b4c; transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.admin-button.secondary, .action-button.secondary { background-color: #6c757d; }
+.admin-button.secondary:hover, .action-button.secondary:hover { background-color: #5a6268; }
+.admin-button.danger, .action-button.danger { background-color: #D42A2A; }
+.admin-button.danger:hover, .action-button.danger:hover { background-color: #b02323; }
+.admin-button.approve { background-color: #28a745; } .admin-button.approve:hover { background-color: #1e7e34; }
+.admin-button.reject { background-color: #dc3545; } .admin-button.reject:hover { background-color: #c82333; }
+.admin-button.small { padding: 5px 10px; font-size: 0.85em; }
+.action-button.add-product { background-color: #2E572E; } .action-button.add-product:hover { background-color: #1e3c1e; }
+.action-button.confirm-product { background-color: #007bff; } .action-button.confirm-product:hover { background-color: #0056b3; }
+.action-button.submit-order { background-color: #28a745; font-size: 1.1em; padding: 12px 25px;} .action-button.submit-order:hover { background-color: #1e7e34; }
+.evade-order-btn { background-color:#17a2b8; color:white; padding:8px 15px; border:none; border-radius:5px; cursor:pointer; margin-top:15px; display:inline-block; transition: background-color 0.2s ease; font-weight: 500; font-size: 0.9em;}
+.evade-order-btn:hover { background-color: #117a8b; }
+
+/* Tabelle */
+.users-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95em; }
+.users-table th, .users-table td { border: 1px solid #dee2e6; padding: 12px 15px; text-align: left; vertical-align: middle;}
+.users-table th { background-color: #f8f9fa; color: #495057; font-weight: 600; }
+.users-table tr:nth-child(even) { background-color: #fcfdff; }
+.users-table tr:hover { background-color: #eef4f8; }
+.users-table .actions-cell a, .users-table .actions-cell form { margin-right: 6px; display: inline-block; }
+.users-table .actions-cell button { padding: 6px 10px; font-size: 0.9em; margin-top: 0; }
+
+/* Lista Ordini e Dettagli */
+.orders-list .order-record { border: 1px solid #dee2e6; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden;}
+.order-summary { padding: 15px 20px; background-color: #f8f9fa; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.order-summary:hover { background-color: #eef4f8; }
+.order-summary h3 { margin: 0; font-size: 1.15em; color: #005687; font-weight: 600;}
+.order-summary .order-meta { font-size: 0.9em; color: #6c757d; text-align: right; }
+.order-summary .order-meta span { display: block; line-height: 1.5;}
+.order-summary .status-badge { padding: 4px 9px; border-radius: 12px; font-size: 0.75em; font-weight: bold; color: white; text-transform: uppercase; letter-spacing: 0.5px;}
+.status-badge.inviato { background-color: #ffc107; color: #212529;}
+.status-badge.in-lavorazione, .status-badge.approvato-parzialmente { background-color: #17a2b8; }
+.status-badge.completato { background-color: #28a745; }
+.status-badge.rifiutato, .status-badge.annullato { background-color: #dc3545; }
+.order-details { padding: 20px;  background-color: #fff; border-top: 1px solid #dee2e6;}
+.order-details h4 { margin-top: 0; margin-bottom: 15px; font-size: 1.1em; color: #333; border-bottom: 1px solid #eee; padding-bottom: 8px;}
+.product-detail-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dotted #e9ecef; font-size: 0.95em; }
+.product-detail-item:last-child { border-bottom: none; }
+.product-info { flex-grow: 1; } .product-info strong { color: #2E572E; }
+.product-info .notes { font-size: 0.85em; color: #777; display: block; margin-top: 3px;}
+.product-actions { white-space: nowrap; }
+.product-actions button { margin-left: 8px; padding: 5px 10px; font-size: 0.85em;}
+.status-prodotto { font-weight: bold; margin-left: 10px; font-size: 0.9em; }
+.status-prodotto.inviato { color: #b8860b; } 
+.status-prodotto.approvato { color: green; }
+.status-prodotto.rifiutato { color: red; }
+.status-prodotto.evaso, .status-prodotto.ordinato { color: #007bff; }
+
+/* Lista Prodotti in form_page.php */
+#added-products-list .product-item { background-color: #fdfdff; border: 1px solid #e9ecef; padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.95em; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+#added-products-list .product-details { flex-grow: 1; }
+#added-products-list .product-details strong { color: #333; }
+#added-products-list .product-notes { font-size: 0.85em; color: #6c757d; display: block; margin-top: 3px; }
+#added-products-list .remove-item-btn { background: none; border: none; color: #D42A2A; cursor: pointer; font-size: 1.3em; padding: 0 5px; line-height: 1;}
+#added-products-list .remove-item-btn:hover { color: #b02323; }
+
+/* Messaggi di Feedback */
+.feedback-message-container { margin-bottom: 20px; }
+.error-message, .success-message { padding: 12px 18px; border-radius: 5px; margin-bottom: 20px; font-weight: 500; border: 1px solid transparent; text-align: center; }
+.error-message { color: #842029; background-color: #f8d7da; border-color: #f5c2c7; }
+.success-message { color: #0f5132; background-color: #d1e7dd; border-color: #badbcc; }
+
+/* Footer */
+.footer-logo-area { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid #e9ecef; }
+.footer-logo-area img { max-width: 60px; opacity: 0.5; }
