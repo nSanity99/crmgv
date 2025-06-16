@@ -114,7 +114,11 @@ try {
 
     $conn->commit();
     error_log("[submit_order_action.php] Transazione completata con successo per ordine #{$id_ordine_inserito}.");
-    
+
+    // Invia notifica email con i dettagli dell'ordine
+    require_once __DIR__ . '/../includes/mailer/order_mailer.php';
+    sendOrderNotification($id_ordine_inserito, $nome_richiedente, $centro_costo, $prodotti);
+
     // MODIFICATO: Aggiunto ../
     header("Location: ../form_page.php?status=order_success");
     exit;
@@ -128,8 +132,14 @@ try {
     header("Location: ../form_page.php?status=order_error&message=" . $error_message_url);
     exit;
 } finally {
-    if (isset($stmt_ordine) && $stmt_ordine) $stmt_ordine->close();
-    if (isset($stmt_dettaglio) && $stmt_dettaglio) $stmt_dettaglio->close();
-    if ($conn) $conn->close();
+    if (isset($stmt_ordine) && $stmt_ordine instanceof mysqli_stmt) {
+        @mysqli_stmt_close($stmt_ordine);
+    }
+    if (isset($stmt_dettaglio) && $stmt_dettaglio instanceof mysqli_stmt) {
+        @mysqli_stmt_close($stmt_dettaglio);
+    }
+    if (isset($conn) && $conn instanceof mysqli) {
+        $conn->close();
+    }
 }
 ?>
