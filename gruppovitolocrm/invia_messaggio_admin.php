@@ -21,7 +21,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO segnalazioni_chat (id_segnalazione, id_utente, messaggio_admin, data_messaggio) VALUES (?, 0, ?, CURRENT_TIMESTAMP)");
+$stmt = $conn->prepare("INSERT INTO segnalazioni_chat (id_segnalazione, id_utente, messaggio_admin, data_messaggio, letto_da_admin) VALUES (?, 0, ?, CURRENT_TIMESTAMP, 1)");
 $stmt->bind_param("is", $id_segnalazione, $messaggio);
 $success = $stmt->execute();
 $stmt->close();

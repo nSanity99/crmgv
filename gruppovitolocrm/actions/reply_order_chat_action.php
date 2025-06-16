@@ -35,7 +35,7 @@ if (!$row || $row['id_utente_richiedente'] != $_SESSION['user_id'] || !empty($ro
     exit;
 }
 
-$sql = 'UPDATE ordini_chat SET risposta_utente = ?, data_risposta = CURRENT_TIMESTAMP WHERE id = ?';
+$sql = 'UPDATE ordini_chat SET risposta_utente = ?, data_risposta = CURRENT_TIMESTAMP, letto_da_utente = 1, letto_da_admin = 0 WHERE id = ?';
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('si', $risposta, $id_messaggio);
 $success = $stmt->execute();
