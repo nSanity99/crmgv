@@ -1,0 +1,32 @@
+[13-Jun-2025 12:59:53 Europe/Berlin] --- [2025-06-13 12:59:53] Accesso a gestioneutenze.php (View: list) UTENTE: admin ---
+[13-Jun-2025 12:59:53 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 12:59:53 Europe/Berlin] PHP Notice:  Trying to get property 'connect_error' of non-object in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 12:59:53 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 12:59:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /var/www/gruppovitolocrm/gestioneutenze.php:48
+Stack trace:
+#0 {main}
+  thrown in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 12:59:55 Europe/Berlin] --- [2025-06-13 12:59:55] Accesso a gestioneutenze.php (View: list) UTENTE: admin ---
+[13-Jun-2025 12:59:55 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 12:59:55 Europe/Berlin] PHP Notice:  Trying to get property 'connect_error' of non-object in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 12:59:55 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 12:59:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /var/www/gruppovitolocrm/gestioneutenze.php:48
+Stack trace:
+#0 {main}
+  thrown in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 13:00:40 Europe/Berlin] --- [2025-06-13 13:00:40] Accesso a gestioneutenze.php (View: list) UTENTE: admin ---
+[13-Jun-2025 13:00:40 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 13:00:40 Europe/Berlin] PHP Notice:  Trying to get property 'connect_error' of non-object in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 13:00:40 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 13:00:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /var/www/gruppovitolocrm/gestioneutenze.php:48
+Stack trace:
+#0 {main}
+  thrown in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 13:00:41 Europe/Berlin] --- [2025-06-13 13:00:41] Accesso a gestioneutenze.php (View: list) UTENTE: admin ---
+[13-Jun-2025 13:00:41 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 13:00:41 Europe/Berlin] PHP Notice:  Trying to get property 'connect_error' of non-object in /var/www/gruppovitolocrm/gestioneutenze.php on line 43
+[13-Jun-2025 13:00:41 Europe/Berlin] PHP Notice:  Undefined variable: conn_gu in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
+[13-Jun-2025 13:00:41 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /var/www/gruppovitolocrm/gestioneutenze.php:48
+Stack trace:
+#0 {main}
+  thrown in /var/www/gruppovitolocrm/gestioneutenze.php on line 48
