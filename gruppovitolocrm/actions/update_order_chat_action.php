@@ -23,7 +23,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO ordini_chat (id_ordine, id_utente, messaggio_admin, data_messaggio) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
+$stmt = $conn->prepare("INSERT INTO ordini_chat (id_ordine, id_utente, messaggio_admin, data_messaggio, letto_da_admin) VALUES (?, ?, ?, CURRENT_TIMESTAMP, 1)");
 $admin_id = $_SESSION['user_id'];
 $stmt->bind_param('iis', $id_ordine, $admin_id, $messaggio);
 $success = $stmt->execute();

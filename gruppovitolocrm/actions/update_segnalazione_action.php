@@ -50,7 +50,7 @@ try {
         $id_admin = $_SESSION['user_id'] ?? null;
         if (!$id_admin) throw new Exception("ID admin non disponibile nella sessione.");
 
-        $insert = $conn->prepare("INSERT INTO segnalazioni_chat (id_segnalazione, id_utente, messaggio_admin, data_messaggio) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
+        $insert = $conn->prepare("INSERT INTO segnalazioni_chat (id_segnalazione, id_utente, messaggio_admin, data_messaggio, letto_da_admin) VALUES (?, ?, ?, CURRENT_TIMESTAMP, 1)");
         if (!$insert) throw new Exception("Errore prepare INSERT: " . $conn->error);
 
         $insert->bind_param("iis", $id_segnalazione, $id_admin, $messaggio_admin);
