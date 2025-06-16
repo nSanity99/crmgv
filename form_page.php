@@ -229,6 +229,10 @@ if (isset($_GET['status'])) {
                                 <option value="">Prima scegli la categoria</option>
                             </select>
                         </div>
+                        <div class="form-group" id="custom-product-container" style="display:none;">
+                            <label for="custom-product-input">Prodotto Personalizzato:</label>
+                            <input type="text" id="custom-product-input" placeholder="Scrivi nome prodotto...">
+                        </div>
                     </div>
 
                     <hr style="border: 0; border-top: 1px dashed #ced4da; margin: 15px 0 25px;">
@@ -286,6 +290,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const productSearchResults = document.getElementById('product-search-results');
     const categorySelect = document.getElementById('category-select'); // Nuovo
     const productSelectByCategory = document.getElementById('product-select-by-category'); // Nuovo
+    const customProductContainer = document.getElementById('custom-product-container');
+    const customProductInput = document.getElementById('custom-product-input');
 
     let selectedProduct = null;
 
@@ -356,6 +362,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 option.textContent = productName;
                 productSelectByCategory.appendChild(option);
             });
+            const customOption = document.createElement('option');
+            customOption.value = '__custom__';
+            customOption.textContent = 'Prodotto Personalizzato';
+            productSelectByCategory.appendChild(customOption);
             productSelectByCategory.disabled = false;
         }
     });
@@ -363,11 +373,20 @@ document.addEventListener('DOMContentLoaded', function() {
     productSelectByCategory.addEventListener('change', function() {
         const selectedProdName = this.value;
         const selectedCatName = categorySelect.value;
-        if (selectedProdName) {
+
+        if (selectedProdName === '__custom__') {
+            customProductContainer.style.display = 'block';
+            productSearchInput.value = '';
+            selectedProduct = null;
+            customProductInput.focus();
+        } else if (selectedProdName) {
+            customProductContainer.style.display = 'none';
+            customProductInput.value = '';
             productSearchInput.value = selectedProdName; // Aggiorna il campo principale
-            // Crea l'oggetto `selectedProduct` che serve alla logica di conferma
             selectedProduct = { nome: selectedProdName, categoria: selectedCatName };
         } else {
+            customProductContainer.style.display = 'none';
+            customProductInput.value = '';
             productSearchInput.value = '';
             selectedProduct = null;
         }
@@ -382,12 +401,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     confirmProductBtn.addEventListener('click', function() {
-        let productName = productSearchInput.value.trim();
+        let productName;
         let productCategory = 'Non a catalogo'; // Default
 
-        // Se un prodotto è stato selezionato (da ricerca o dropdown), usa la sua categoria
-        if (selectedProduct && selectedProduct.nome === productName) {
-            productCategory = selectedProduct.categoria;
+        if (productSelectByCategory.value === '__custom__') {
+            productName = customProductInput.value.trim();
+            productCategory = 'Personalizzato';
+        } else {
+            productName = productSearchInput.value.trim();
+            if (selectedProduct && selectedProduct.nome === productName) {
+                productCategory = selectedProduct.categoria;
+            }
         }
 
         const quantity = productQuantityInput.value.trim();
@@ -396,7 +420,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!productName) {
             alert('Cercare e selezionare un prodotto, o specificarne uno nuovo.');
-            productSearchInput.focus();
+            if (productSelectByCategory.value === '__custom__') {
+                customProductInput.focus();
+            } else {
+                productSearchInput.focus();
+            }
             return;
         }
         if (!quantity || parseInt(quantity) <= 0 || parseInt(quantity) > 999) {
@@ -425,6 +453,8 @@ document.addEventListener('DOMContentLoaded', function() {
         categorySelect.value = '';
         productSelectByCategory.innerHTML = '<option value="">Prima scegli la categoria</option>';
         productSelectByCategory.disabled = true;
+        customProductContainer.style.display = 'none';
+        customProductInput.value = '';
     }
     
     // Funzioni `showProductFormBtn`, `cancelProductBtn`, `updateHiddenJsonInput`, `renderAddedProducts`, `htmlspecialchars` e `submit` event listener
