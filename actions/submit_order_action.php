@@ -114,7 +114,11 @@ try {
 
     $conn->commit();
     error_log("[submit_order_action.php] Transazione completata con successo per ordine #{$id_ordine_inserito}.");
-    
+
+    // Invia notifica email con i dettagli dell'ordine
+    require_once __DIR__ . '/../includes/mailer/order_mailer.php';
+    sendOrderNotification($id_ordine_inserito, $nome_richiedente, $centro_costo, $prodotti);
+
     // MODIFICATO: Aggiunto ../
     header("Location: ../form_page.php?status=order_success");
     exit;
